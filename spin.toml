@@ -1,0 +1,15 @@
+spin_version = "1"
+authors = ["Sebastián Alvarez <seba.alvarez16@gmail.com>"]
+name = "piet-wasm"
+trigger = { type = "http", base = "/" }
+version = "0.1.0"
+
+[[component]]
+id = "paintings"
+source = "./components/npiet.wasm"
+files = [{ source = "./paintings/", destination = "/paintings" }]
+[component.trigger]
+route = "/piet"
+executor = { type = "wagi", argv = "${SCRIPT_NAME} paintings/helloworld-mondrian.ppm" }
+[component.build]
+command = "cd npiet && make"
